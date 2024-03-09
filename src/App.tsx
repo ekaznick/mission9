@@ -48,6 +48,31 @@ function SearchBar({ value, onChange }: SearchBarProps) {
   );
 }
 
+function TeamCard({ school, mascot, location }: SchoolProps) {
+  const cardStyle = {
+    border: '1px solid #ddd',
+    padding: '10px',
+    marginBottom: '10px',
+    borderRadius: '5px',
+    display: 'inline-block',
+  };
+
+  return (
+    <div style={cardStyle}>
+      <div>
+        <strong>School: </strong> {school}
+      </div>
+      <div>
+        <strong>Mascot:</strong> {mascot}
+      </div>
+      <div>
+        <strong>Location:</strong> {location}
+      </div>
+      <div style={{ marginBottom: '10px' }}></div>
+    </div>
+  );
+}
+
 function App() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const { darkMode, toggleDarkMode } = useDarkMode();
@@ -72,18 +97,12 @@ function App() {
       <ul>
         {filteredSchools.map((team, index) => (
           <li key={index}>
-            <div>
-              <strong>School:</strong> {team.school}
-            </div>
-            <div>
-              <strong>Mascot:</strong> {team.mascot}
-            </div>
-            <div>
-              <strong>Location:</strong> {team.location}
-            </div>
-            <div>
-              <br></br>
-            </div>
+            <TeamCard
+              key={index}
+              school={team.school}
+              mascot={team.mascot}
+              location={team.location}
+            />
           </li>
         ))}
       </ul>
